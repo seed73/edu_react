@@ -3,19 +3,24 @@
 import React, { useState, useContext  } from 'react';
 import Image from "next/image";
 import { login } from '../../../api/auth'
-import { AuthContext } from '../../../contexts/AuthContext';
+// import { AuthContext } from '../../../contexts/AuthContext';
+import { signIn } from 'next-auth/react'
 
 export default function LoginPage() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
-  const { setIsAuth } = useContext(AuthContext); 
+  // const { setIsAuth } = useContext(AuthContext); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await login(id, password);
+    const res = await signIn('credentials', {
+      redirect: false, // 페이지 리디렉션을 방지
+      username: id,
+      password: password
+    });
     
     if(res.status === 200){
-      setIsAuth(true)
+      // setIsAuth(true)
     }
   };
 
