@@ -6,9 +6,6 @@ const LoginAuthorization = btoa(`Basic ${process.env.NEXT_PUBLIC_EDU_FRONT_ID} $
 
 const login = async (username, password) => {
     try {
-
-        console.log('a')
-
         const response = await axios.post(`${BASE_URL}/login/`, {
             username,
             password
