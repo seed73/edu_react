@@ -1,7 +1,7 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import axios from 'axios';
-
+import jwt from 'jsonwebtoken';
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_EDU_PROTOCOL}://${process.env.NEXT_PUBLIC_EDU_URL}:${process.env.NEXT_PUBLIC_EDU_PORT}/api`;
 const LoginAuthorization = btoa(`Basic ${process.env.NEXT_PUBLIC_EDU_FRONT_ID} ${process.env.NEXT_PUBLIC_EDU_FRONT_CLIENT_SECRET}`)
@@ -26,7 +26,14 @@ export const authOptions = {
                   'LoginAuthorization': LoginAuthorization
               }
           })
-          return response.data;
+          // console.log("------------------------------------")
+          // console.log(response)
+          // console.log("------------------------------------")
+
+          const decode = jwt.decode(response.data.access_token)
+          console.log(decode)
+          return response.data
+
         } catch (e) {
           console.log('error!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
           console.log(e)
@@ -40,16 +47,17 @@ export const authOptions = {
     jwt: true,
   },
   callbacks: {
-    async jwt(token, user) {
-      // console.log('111111111111111111111111111111111111111111111111111!!!!!!!!!!!!!')
-      // console.log(user)
-      if (user) {
-        token.jwt = user.jwt;
-      }
-      return token;
+    async jwt(data) {
+      // console.log(data)
+      // if (user) {
+      //   token.user = user;
+      // }
+      return data;
     },
     async session(session, token) {
-      session.jwt = token.jwt;
+      if (token?.user) {
+        session.user = token.user;
+      }
       return session;
     },
   },

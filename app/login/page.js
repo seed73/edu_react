@@ -32,7 +32,7 @@ export default function LoginPage() {
       password
     });
 
-    console.log(res)
+    // console.log(res)
     
     if(res.status === 200){
       // setIsAuth(true)

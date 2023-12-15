@@ -22,7 +22,7 @@ export default function LoginPage() {
       password: password
     });
     if(res.ok){
-      console.log(session.user.name)
+      // console.log(session.user.name)
     }
   };
 

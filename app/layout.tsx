@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import LoginPage from "./auth/login/LoginPage";
 import FullLayout from "./full_layout";
+import SessionProviderWrapper from '@/utils/sessionProviderWrapper'
 
 
 export default function RootLayout({
@@ -12,7 +13,9 @@ export default function RootLayout({
   if(true){
 
     return(
-      <LoginPage></LoginPage>
+      <SessionProviderWrapper>
+        <LoginPage></LoginPage>
+      </SessionProviderWrapper>
     )
 
   } else {
