@@ -31,7 +31,8 @@ export const authOptions = {
           // console.log("------------------------------------")
 
           const decode = jwt.decode(response.data.access_token)
-          console.log(decode)
+          // console.log(response.data.access_token)
+          // console.log(decode)
           return response.data
 
         } catch (e) {
@@ -48,13 +49,21 @@ export const authOptions = {
   },
   callbacks: {
     async jwt(data) {
+      // console.log('1111111111111111111111111')
       // console.log(data)
-      // if (user) {
-      //   token.user = user;
-      // }
+      const decode = jwt.decode(data.access_token)
+      if (data) {
+        // console.log('1111111111111111111111111')
+        // console.log(data)
+        // token.user = decode.preferred_username;
+      }
       return data;
     },
     async session(session, token) {
+      console.log('1111111111111111111111111')
+      console.log(session.token)
+      console.log('222222222222222222222222')
+      console.log(token)
       if (token?.user) {
         session.user = token.user;
       }

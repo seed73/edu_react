@@ -7,6 +7,7 @@ import Loader from "@/components/common/Loader";
 
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
+import { useSession } from "next-auth/react";
 
 export default function FullLayout({
   children,
@@ -16,6 +17,9 @@ export default function FullLayout({
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const [loading, setLoading] = useState<boolean>(true);
+  const session = useSession();
+
+  console.log(session)
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 1000);
@@ -25,11 +29,12 @@ export default function FullLayout({
     <html lang="en">
       <body suppressHydrationWarning={true}>
         <div className="dark:bg-boxdark-2 dark:text-bodydark">
+          
           {loading ? (
             <Loader />
           ) : (
             <div className="flex h-screen overflow-hidden">
-              {/* <!-- ===== Sidebar Start ===== --> */}
+              {/* <!-- ===== Sidebar Start ===== --> */}              
               <Sidebar
                 sidebarOpen={sidebarOpen}
                 setSidebarOpen={setSidebarOpen}

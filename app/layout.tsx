@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import LoginPage from "./auth/login/LoginPage";
 import FullLayout from "./full_layout";
 import SessionProviderWrapper from '@/utils/sessionProviderWrapper'
-
+// import { SessionProvider } from "next-auth/react";
 
 export default function RootLayout({
   children,
@@ -10,7 +10,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
 
-  if(true){
+  if(false){
 
     return(
       <SessionProviderWrapper>
@@ -19,6 +19,6 @@ export default function RootLayout({
     )
 
   } else {
-    return (<FullLayout>{children}</FullLayout>)
+    return (<SessionProviderWrapper><FullLayout>{children}</FullLayout></SessionProviderWrapper>)
   }
 }
