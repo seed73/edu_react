@@ -17,18 +17,15 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await signIn('credentials', {
-      redirect: false, // 페이지 리디렉션을 방지
+      redirect: true, // 페이지 리디렉션을 방지
       username: id,
       password: password
     });
-    if(res.ok){
-      // console.log(session.user.name)
-    }
+
+    console.log('aaaaaaaaaa')
   };
 
   return (
-    <html lang="en">
-      <body suppressHydrationWarning={true}>
     <div className='login-page pageWrapper d-lg-flex'>
       <Image
         width={926}
@@ -64,6 +61,5 @@ export default function LoginPage() {
         find password
       </p>
     </div>
-    </body></html>
   );
 }

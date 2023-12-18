@@ -60,15 +60,14 @@ export const authOptions = {
       return data;
     },
     async session(session, token) {
-      console.log('1111111111111111111111111')
-      console.log(session.token)
-      console.log('222222222222222222222222')
-      console.log(token)
       if (token?.user) {
         session.user = token.user;
       }
       return session;
     },
   },
+  pages: {
+    signIn:'/'
+  }
 }
 export default NextAuth(authOptions)
