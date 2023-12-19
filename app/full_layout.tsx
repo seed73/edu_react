@@ -79,7 +79,6 @@ export default function FullLayout({
     );
   } else {
     return (
-      
         <html><body>
           { loading ? (
             <Loader />

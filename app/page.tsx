@@ -1,5 +1,6 @@
 import ECommerce from "@/components/Dashboard/E-commerce";
 import { Metadata } from "next";
+import Main from "@/components/Main/Main";
 
 export const metadata: Metadata = {
   title: "EDUPLEX MANAGE SYSTEM",
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <ECommerce />
+      <Main />
     </>
   );
 }

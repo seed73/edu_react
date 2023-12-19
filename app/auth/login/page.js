@@ -2,7 +2,7 @@
 
 import React, { useState, useContext  } from 'react';
 import Image from "next/image";
-import { login } from '../../../api/auth'
+// import { login } from '../../../api/auth'
 // import { AuthContext } from '../../../contexts/AuthContext';
 import { signIn } from 'next-auth/react'
 import { useSession } from 'next-auth/react';
