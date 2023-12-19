@@ -9,16 +9,5 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
-  if(false){
-
-    return(
-      <SessionProviderWrapper>
-        <LoginPage></LoginPage>
-      </SessionProviderWrapper>
-    )
-
-  } else {
-    return (<SessionProviderWrapper><FullLayout>{children}</FullLayout></SessionProviderWrapper>)
-  }
+  return (<SessionProviderWrapper><FullLayout>{children}</FullLayout></SessionProviderWrapper>)
 }

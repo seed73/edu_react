@@ -17,7 +17,7 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await signIn('credentials', {
-      redirect: true, // 페이지 리디렉션을 방지
+      redirect: true,
       callbackUrl:'/',
       username: id,
       password: password

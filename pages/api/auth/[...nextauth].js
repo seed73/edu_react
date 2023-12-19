@@ -49,8 +49,6 @@ export const authOptions = {
   },
   callbacks: {
     async jwt(data) {
-      // console.log('1111111111111111111111111')
-      // console.log(data)
       const decode = jwt.decode(data.access_token)
       if (data) {
         // console.log('1111111111111111111111111')
@@ -66,8 +64,5 @@ export const authOptions = {
       return session;
     },
   },
-  pages: {
-    signIn:'/'
-  }
 }
 export default NextAuth(authOptions)

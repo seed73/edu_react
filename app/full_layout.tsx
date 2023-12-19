@@ -26,7 +26,7 @@ export default function FullLayout({
   
   useEffect(() => {
     if (
-      status != "authenticated"
+      status == "unauthenticated"
     ) {
       router.push("/auth/login");
       router.refresh();
@@ -37,12 +37,11 @@ export default function FullLayout({
     setTimeout(() => setLoading(false), 1000);
   }, []);
   
-  if(status != "unauthenticated"  ) {  
+  if(status == "authenticated"  ) {  
     return (
       <html lang="en">
         <body suppressHydrationWarning={true}>
           <div className="dark:bg-boxdark-2 dark:text-bodydark">
-
             {loading ? (
               <Loader />
             ) : (
@@ -80,7 +79,17 @@ export default function FullLayout({
     );
   } else {
     return (
-      <html><body>{children}</body></html>
+      
+        <html><body>
+          { loading ? (
+            <Loader />
+            ) : (
+              <main>
+                {children}
+              </main>
+          )}
+        </body></html>
+      
     )
   }
 }
