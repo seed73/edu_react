@@ -61,6 +61,9 @@ export const authOptions = {
       if (token?.user) {
         session.user = token.user;
       }
+
+      // console.log(jwt.decode(session.token.token.user.access_token))
+      // console.log('session set')
       return session;
     },
   },
