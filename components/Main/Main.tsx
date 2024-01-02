@@ -13,37 +13,33 @@ export const metadata: Metadata = {
 import React, { useState, useEffect } from 'react';
 import { useSession } from "next-auth/react";
 import getSelfInfo from "@/api/auth"
+import { getSession } from 'next-auth/react';
 
 const Main = () => {
 
-  const { data: session } = useSession();
-
+  
   const infoChangeClick = async () => {
-    if (session) {
-      try {
-        const data = await getSelfInfo(session);
-        // setUserInfo(data); // 상태 업데이트
-        console.log(data);
-      } catch (error) {
-        console.error(error);
-      }
-    } else {
-      console.log("No session found!");
+    try {
+      const session = await getSession();
+      console.log(session)
+
+    } catch (error) {
+
     }
   }
 
-  useEffect(() => {
-    if (session) {
-      // 세션에서 토큰을 가져와 API 함수에 전달
-      getSelfInfo(session)
-        .then((data: any) => {
-          console.log(data)
-        })
-        .catch((error: any) => {
-          console.log(error)
-        });
-    }
-  }, [session]);
+  // useEffect(() => {
+  //   if (session) {
+  //     // 세션에서 토큰을 가져와 API 함수에 전달
+  //     getSelfInfo(session)
+  //       .then((data: any) => {
+  //         console.log(data)
+  //       })
+  //       .catch((error: any) => {
+  //         console.log(error)
+  //       });
+  //   }
+  // }, [session]);
 
 
   return (

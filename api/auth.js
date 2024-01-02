@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Cookie from 'js-cookie';
+import { getSession } from 'next-auth/react';
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_EDU_PROTOCOL}://${process.env.NEXT_PUBLIC_EDU_URL}:${process.env.NEXT_PUBLIC_EDU_PORT}/api`;
 const LoginAuthorization = btoa(`Basic ${process.env.NEXT_PUBLIC_EDU_FRONT_ID} ${process.env.NEXT_PUBLIC_EDU_FRONT_CLIENT_SECRET}`)
@@ -39,8 +40,9 @@ const LoginAuthorization = btoa(`Basic ${process.env.NEXT_PUBLIC_EDU_FRONT_ID} $
 // export { login };
 
 
-const getSelfInfo = async (session) => {
+const getSelfInfo = async () => {
     try {
+        const session = await getSession();
         console.log(session)
         console.log('aaaaaaaa')
         // const response = await axios.post(`${BASE_URL}/api/account/${id}`, {
