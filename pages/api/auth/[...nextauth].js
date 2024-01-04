@@ -52,13 +52,17 @@ export const authOptions = {
   callbacks: {
     async jwt(data) {
       if (data.user) {
+
+        const decode = jwt.decode(data.user.access_token)
+
         data.token.access_token = data.user.access_token
+        data.token.user_id = decode.preferred_username
       }
       return data.token;
     },
     async session({session, token}) {
       if (token?.access_token) { // Ensure access_token exists
-        session.user = {...session.user, access_token: token.access_token};
+        session.user = {...session.user, access_token: token.access_token, user_id : token.user_id};
       }
       return session;
     },

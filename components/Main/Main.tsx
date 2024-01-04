@@ -12,15 +12,16 @@ export const metadata: Metadata = {
 
 import React, { useState, useEffect } from 'react';
 import { useSession } from "next-auth/react";
-import getSelfInfo from "@/api/auth"
+// import getSelfInfo from "@/api/auth"
 import { getSession } from 'next-auth/react';
+import axios from 'axios';
 
 const Main = () => {
 
-  
+  const { data: session, status } = useSession(); // Use the useSession hook
+
   const infoChangeClick = async () => {
     try {
-      const session = await getSession();
       console.log(session)
 
     } catch (error) {
@@ -28,18 +29,17 @@ const Main = () => {
     }
   }
 
-  // useEffect(() => {
-  //   if (session) {
-  //     // 세션에서 토큰을 가져와 API 함수에 전달
-  //     getSelfInfo(session)
-  //       .then((data: any) => {
-  //         console.log(data)
-  //       })
-  //       .catch((error: any) => {
-  //         console.log(error)
-  //       });
-  //   }
-  // }, [session]);
+  useEffect(() => {
+    if (session) {
+      axios.post('/api/updateSession', {}, { withCredentials: true })
+      .then(response => {
+          console.log(response.data);
+      })
+      .catch(error => {
+          console.error('There was an error!', error);
+      });
+    }
+  }, [session]);
 
 
   return (
