@@ -18,7 +18,10 @@ import axios from 'axios';
 
 const Main = () => {
 
-  const { data: session, status } = useSession(); // Use the useSession hook
+  const { data: session, status, update } = useSession(); // Use the useSession hook
+  const [name, setName] = useState('김사원1');
+  const [position, setPosition] = useState('센세센세');
+  
 
   const infoChangeClick = async () => {
     try {
@@ -30,15 +33,11 @@ const Main = () => {
   }
 
   useEffect(() => {
-    if (session) {
-      axios.post('/api/updateSession', {}, { withCredentials: true })
-      .then(response => {
-          console.log(response.data);
-      })
-      .catch(error => {
-          console.error('There was an error!', error);
-      });
-    }
+    // console.log(session)
+
+    setPosition((session?.user as any).position)
+    setName((session?.user as any).name)
+    
   }, [session]);
 
 
@@ -70,9 +69,9 @@ const Main = () => {
           </div>
           <div className="mt-4">
             <h3 className="mb-1.5 text-2xl font-semibold text-black dark:text-white">
-              김사원
+              {name}
             </h3>
-            <p className="font-medium">Ui/Ux Designer</p>
+            <p className="font-medium">{position}</p>
             <div className="flex justify-center items-center">
             <label
               htmlFor="cover"

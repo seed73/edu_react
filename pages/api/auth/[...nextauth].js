@@ -2,8 +2,6 @@ import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-// import getSelfInfo from '@/api/auth'
-import getSelfInfo from "@/api/auth"
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_EDU_PROTOCOL}://${process.env.NEXT_PUBLIC_EDU_URL}:${process.env.NEXT_PUBLIC_EDU_PORT}/api`;
 const LoginAuthorization = btoa(`Basic ${process.env.NEXT_PUBLIC_EDU_FRONT_ID} ${process.env.NEXT_PUBLIC_EDU_FRONT_CLIENT_SECRET}`)
@@ -32,7 +30,7 @@ export const authOptions = {
           // console.log(response)
           // console.log("------------------------------------")
 
-          const decode = jwt.decode(response.data.access_token)
+          
           // console.log(response.data.access_token)
           // console.log(decode)
           return response.data
@@ -50,19 +48,25 @@ export const authOptions = {
     jwt: true,
   },
   callbacks: {
-    async jwt(data) {
-      if (data.user) {
-
-        const decode = jwt.decode(data.user.access_token)
-
-        data.token.access_token = data.user.access_token
-        data.token.user_id = decode.preferred_username
+    jwt: async ({ token, trigger, user, session }) => {
+      if (user) {
+        const decode = jwt.decode(user.access_token)
+        const response = await axios.get(`${BASE_URL}/account/by-user-id/${decode.preferred_username}/`);
+  
+        token = {
+          ...token,
+          ...response.data // This line adds all the properties from response.data to session.user
+        };
+        token.access_token = user.access_token
       }
-      return data.token;
+      return token;
     },
     async session({session, token}) {
       if (token?.access_token) { // Ensure access_token exists
-        session.user = {...session.user, access_token: token.access_token, user_id : token.user_id};
+        session.user = {
+          ...session.user,
+          ...token
+        }
       }
       return session;
     },
