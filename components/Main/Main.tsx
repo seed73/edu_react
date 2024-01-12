@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   // other metadata
 };
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 import { useSession } from "next-auth/react";
 // import getSelfInfo from "@/api/auth"
 import { getSession } from 'next-auth/react';
@@ -21,12 +21,30 @@ const Main = () => {
   const { data: session, status, update } = useSession(); // Use the useSession hook
   const [name, setName] = useState('김사원1');
   const [position, setPosition] = useState('센세센세');
+  // const [isModalOpen, setModalOpen] = useState(false);
+  
+  // type ModalProps = {
+  //   show: boolean;
+  //   onClose: () => void;
+  //   children: ReactNode;
+  // };
+
+  // const Modal: React.FC<ModalProps> = ({ show, onClose, children }) => {
+  //   if (!show) return null;
+  //   return (
+  //     <div className='modal'>
+  //       <button onClick={onClose}>Close</button>
+  //       {children}
+  //     </div>
+  //   );
+  // };
+
   
 
   const infoChangeClick = async () => {
     try {
       console.log(session)
-
+      // setModalOpen(true)
     } catch (error) {
 
     }
@@ -39,6 +57,8 @@ const Main = () => {
     setName((session?.user as any).name)
     
   }, [session]);
+
+
 
 
   return (
@@ -82,6 +102,9 @@ const Main = () => {
           </div>
         </div>
       </div>
+      {/* <Modal show={isModalOpen} onClose={() => setModalOpen(false)}>
+        <p>This is modal content!</p>
+      </Modal> */}
     </>
   );
 };

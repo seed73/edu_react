@@ -34,6 +34,7 @@
     "react-apexcharts": "^1.4.1",
     "react-dom": "18.2.0",
     "react-jvectormap": "^0.0.16",
+    "react-modal": "^3.16.1",
     "react-router-dom": "^6.19.0",
     "reactstrap": "^9.2.1",
     "sass": "^1.69.5",
