@@ -15,6 +15,13 @@ import { useSession } from "next-auth/react";
 // import getSelfInfo from "@/api/auth"
 import { getSession } from 'next-auth/react';
 import axios from 'axios';
+import Modal from 'react-modal';
+
+import ModalComponent from "../Modal/ModalComponent";
+
+// Modal.setAppElement('#root');
+
+
 
 const Main = () => {
 
@@ -22,14 +29,26 @@ const Main = () => {
   const [name, setName] = useState('김사원1');
   const [position, setPosition] = useState('센세센세');
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const infoChangeClick = async () => {
     try {
       console.log(session)
-      // setModalOpen(true)
+      openModal();
     } catch (error) {
 
     }
   }
+
+  
 
   useEffect(() => {
     // console.log(session)
@@ -38,35 +57,6 @@ const Main = () => {
     setName((session?.user as any).name)
     
   }, [session]);
-
-  const customModalStyles: ReactModal.Styles = {
-    overlay: {
-      backgroundColor: " rgba(0, 0, 0, 0.4)",
-      width: "100%",
-      height: "100vh",
-      zIndex: "10",
-      position: "fixed",
-      top: "0",
-      left: "0",
-    },
-    content: {
-      width: "360px",
-      height: "180px",
-      zIndex: "150",
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      borderRadius: "10px",
-      boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.25)",
-      backgroundColor: "white",
-      justifyContent: "center",
-      overflow: "auto",
-    },
-  };
-
-
-
 
   return (
     <>
@@ -109,9 +99,16 @@ const Main = () => {
           </div>
         </div>
       </div>
-      {/* <Modal show={isModalOpen} onClose={() => setModalOpen(false)}>
-        <p>This is modal content!</p>
-      </Modal> */}
+
+      <ModalComponent
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="Modal"
+      >
+        {/* 모달 컨텐츠 */}
+        <h2>모달 내용</h2>
+        <button onClick={closeModal}>닫기</button>
+      </ModalComponent>
     </>
   );
 };
