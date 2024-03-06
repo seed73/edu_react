@@ -22,8 +22,8 @@ export default function FullLayout({
   const { data: session, status } = useSession();
 
   const router = useRouter();
-
   
+
   useEffect(() => {
     if (
       status == "unauthenticated"

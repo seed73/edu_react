@@ -13,9 +13,6 @@ export const metadata: Metadata = {
 import React, { useState, useEffect, ReactNode } from 'react';
 import { useSession } from "next-auth/react";
 // import getSelfInfo from "@/api/auth"
-import { getSession } from 'next-auth/react';
-import axios from 'axios';
-import Modal from 'react-modal';
 
 import ModalComponent from "../Modal/ModalComponent";
 
@@ -48,7 +45,18 @@ const Main = () => {
     }
   }
 
-  
+  const closeButtonBottomCenterStyle = {
+    position: 'absolute', // 위치를 모달 내부의 상대적 위치로 지정
+    bottom: '20px', // 하단에서 20px 떨어진 위치
+    left: '50%', // 좌측에서 50% 떨어진 위치에 배치하여 중앙 정렬 효과
+    transform: 'translateX(-50%)', // X축 기준으로 -50% 이동하여 정확한 중앙 정렬
+    padding: '10px 20px', // 패딩 추가
+    backgroundColor: '#f0f0f0', // 배경색 지정
+    border: 'none', // 테두리 제거
+    borderRadius: '5px', // 버튼 모서리 둥글게 처리
+    cursor: 'pointer', // 마우스 오버 시 커서 변경
+  };
+
 
   useEffect(() => {
     // console.log(session)
@@ -100,14 +108,10 @@ const Main = () => {
         </div>
       </div>
 
-      <ModalComponent
-        isOpen={isModalOpen}
-        onRequestClose={closeModal}
-        contentLabel="Modal"
-      >
+      <ModalComponent isOpen={isModalOpen} onRequestClose={closeModal} contentLabel="Modal">
         {/* 모달 컨텐츠 */}
         <h2>모달 내용</h2>
-        <button onClick={closeModal}>닫기</button>
+        <button onClick={closeModal} className="absolute bottom-5 left-1/2 transform -translate-x-1/2 bg-primary text-sm font-medium text-white px-4 py-2 rounded cursor-pointer">닫기</button>
       </ModalComponent>
     </>
   );

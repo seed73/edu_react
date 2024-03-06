@@ -11,6 +11,16 @@ interface ModalComponentProps {
   children: React.ReactNode;
 }
 
+const closeButtonStyle = {
+  position: 'absolute', // 버튼을 모달의 상대적 위치에 고정
+  top: '10px', // 상단에서부터의 거리
+  right: '10px', // 우측에서부터의 거리
+  background: 'transparent', // 배경색 투명
+  border: 'none', // 테두리 없음
+  fontSize: '1.5rem', // 글자 크기
+  cursor: 'pointer' // 마우스 오버 시 커서 변경
+};
+
 const ModalComponent: React.FC<ModalComponentProps> = ({
   isOpen,
   onRequestClose,
@@ -25,7 +35,7 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
       style={{
         overlay: {
           backgroundColor: 'rgba(255, 255, 255, 0.75)', // 투명한 백그라운드
-          zIndex: 1000, // z-index 값 조정
+          zIndex: 9001, // z-index 값 조정
         },
         content: {
           top: '50%',
@@ -44,7 +54,7 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
       }}
     >
       {children}
-      <button onClick={onRequestClose}>닫기</button> {/* Close 버튼 추가 */}
+      <button onClick={onRequestClose} style={closeButtonStyle}>&#x2715;</button>
     </Modal>
   );
 };
