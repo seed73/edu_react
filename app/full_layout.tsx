@@ -10,6 +10,7 @@ import Header from "@/components/Header";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import LoginPage from "./auth/login/LoginPage";
+import { signOut } from 'next-auth/react';
 
 export default function FullLayout({
   children,
@@ -27,17 +28,32 @@ export default function FullLayout({
   useEffect(() => {
     if (
       status == "unauthenticated"
-    ) {
-      router.push("/auth/login");
-      router.refresh();
+      ) {
+        router.push("/auth/login");
+        router.refresh();
+      } else {
+        // console.log(session)        
+        // console.log(status)      
     }
   }, [session, status, router]);
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 1000);
   }, []);
+
+  if(loading && (session == undefined || session == null)){
+    return(
+    <html lang="en">
+      <body suppressHydrationWarning={true}>
+        <div className="dark:bg-boxdark-2 dark:text-bodydark">
+          <Loader/>
+        </div>
+      </body>
+    </html>
+    )
+  }
   
-  if(status == "authenticated"  ) {  
+  if(status == "authenticated" && session != undefined && session != null ) {
     return (
       <html lang="en">
         <body suppressHydrationWarning={true}>

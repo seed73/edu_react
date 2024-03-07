@@ -1,7 +1,7 @@
 import { signOut } from 'next-auth/react';
 
 const LogoutButton = () => {
-
+6
     const handleLogout = () => {
         // 로그아웃 실행
         signOut({ redirect: true, callbackUrl: '/auth/login' });
