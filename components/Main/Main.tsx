@@ -15,6 +15,7 @@ import { useSession } from "next-auth/react";
 // import getSelfInfo from "@/api/auth"
 
 import ModalComponent from "../Modal/ModalComponent";
+import ModalInfoChange from "../Modal/ModalInfoChange";
 // Modal.setAppElement('#root');
 
 
@@ -111,9 +112,7 @@ const Main = () => {
         </div>
   
         <ModalComponent isOpen={isModalOpen} onRequestClose={closeModal} contentLabel="Modal">
-          {/* 모달 컨텐츠 */}
-          <h2>모달 내용</h2>
-          <button onClick={closeModal} className="absolute bottom-5 left-1/2 transform -translate-x-1/2 bg-primary text-sm font-medium text-white px-4 py-2 rounded cursor-pointer">닫기</button>
+          <ModalInfoChange closeModal={closeModal}></ModalInfoChange>
         </ModalComponent>
       </>
     );

@@ -2,7 +2,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 
-// Modal.setAppElement('#root');
+Modal.setAppElement('div');
 
 interface ModalComponentProps {
   isOpen: boolean;
