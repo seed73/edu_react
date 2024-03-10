@@ -215,6 +215,21 @@ input::placeholder {
   border:0px
 }
 
+.login-button-disabled {
+  width: 315px;
+  height: 60px;
+  background-color: gray;
+  color: white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border-radius: 5px;
+  border:0px
+}
+
+
 
 /* LoginPage.css */
 .login-page {
