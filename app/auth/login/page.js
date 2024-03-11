@@ -1,12 +1,10 @@
 "use client"
 
-import React, { useState, useContext  } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Image from "next/image";
-// import { login } from '../../../api/auth'
-// import { AuthContext } from '../../../contexts/AuthContext';
-import { signIn } from 'next-auth/react'
-import { useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react'
 import AlertModal from "../../../components/Alert/AlertModal";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [id, setId] = useState('');
@@ -15,8 +13,19 @@ export default function LoginPage() {
   const [showAlert, setShowAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const isFormValid = id && password; // 폼이 유효한지 여부를 결정하는 논리
+
+  const router = useRouter();
   
   // const { setIsAuth } = useContext(AuthContext); 
+
+  useEffect(() => {
+    // 로그인 상태 확인
+    if (status === "authenticated") {
+      // 이미 로그인 되어 있으면 원하는 경로로 리디렉션
+      router.replace('/'); // 또는 다른 페이지
+    }
+  }, [status, router]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,8 +43,15 @@ export default function LoginPage() {
       // 로그인 실패 시 에러 메시지를 상태에 설정
       setErrorMessage('아이디 혹은 비밀번호가 일치하지 않습니다.');
       setShowAlert(true);
+    } else {      
+      router.replace(result.url || '/');
     }
   };
+
+  if(status == "authenticated")
+  return (
+    <div></div>
+  )
 
   return (
     <div className='login-page pageWrapper d-lg-flex'>

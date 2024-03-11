@@ -1,5 +1,4 @@
 import React from 'react';
-import LoginPage from "./auth/login/LoginPage";
 import FullLayout from "./full_layout";
 import SessionProviderWrapper from '@/utils/sessionProviderWrapper'
 // import { SessionProvider } from "next-auth/react";
