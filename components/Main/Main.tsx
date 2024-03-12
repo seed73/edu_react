@@ -39,7 +39,7 @@ const Main = () => {
 
   const infoChangeClick = async () => {
     try {
-      console.log(session)
+      // console.log(session)
       openModal();
     } catch (error) {
 

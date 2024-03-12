@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 interface ModalInfoChange {
   closeModal: () => void;
@@ -16,13 +17,17 @@ const UserInfoModalContent: React.FC<ModalInfoChange> = ({ closeModal }) => {
   useEffect(() => {
     const fetchUserData = async () => {
       // 여기에서 데이터를 요청하는 로직 구현
-      // 예시 API 호출: const response = await fetch('/api/user');
+      //예시 API 호출:
+
+      const response = await axios.post('/api/user')
       // const data = await response.json();
+
+      // console.log(data)
       
       // 임시 데이터로 상태 업데이트
       setUserData({
-        name: '사용자 이름',
-        email: 'user@example.com',
+        name: '',
+        email: '',
         // 기타 필드...
       });
     };
@@ -64,6 +69,38 @@ const UserInfoModalContent: React.FC<ModalInfoChange> = ({ closeModal }) => {
         <tbody>
           {/* 이름 필드 */}
           <tr>
+            <td className="px-2 py-2 text-right">아이디:</td>
+            <td className="px-2 py-2">
+              ddd
+            </td>
+          </tr>
+          <tr>
+            <td className="px-2 py-2 text-right">비밀번호:</td>
+            <td className="px-2 py-2">
+              <input
+                type="password"
+                name="password"
+                value={userData.name}
+                onChange={handleChange}
+                className="border rounded px-2 py-1"
+                placeholder='비밀번호'
+              />
+            </td>
+          </tr>
+          <tr>
+            <td className="px-2 py-2 text-right">비밀번호 확인:</td>
+            <td className="px-2 py-2">
+              <input
+                type="password"
+                name="password_check"
+                value={userData.name}
+                onChange={handleChange}
+                className="border rounded px-2 py-1"
+                placeholder='비밀번호 확인'
+              />
+            </td>
+          </tr>
+          <tr>
             <td className="px-2 py-2 text-right">이름:</td>
             <td className="px-2 py-2">
               <input
@@ -72,10 +109,36 @@ const UserInfoModalContent: React.FC<ModalInfoChange> = ({ closeModal }) => {
                 value={userData.name}
                 onChange={handleChange}
                 className="border rounded px-2 py-1"
+                placeholder='이름'
               />
             </td>
           </tr>
-          {/* 이메일 필드 */}
+          <tr>
+            <td className="px-2 py-2 text-right">핸드폰번호:</td>
+            <td className="px-2 py-2">
+              <input
+                type="text"
+                name="phone"
+                value={userData.name}
+                onChange={handleChange}
+                className="border rounded px-2 py-1"
+                placeholder='핸드폰번호'
+              />
+            </td>
+          </tr>
+          <tr>
+            <td className="px-2 py-2 text-right">성별:</td>
+            <td className="px-2 py-2">
+              <input
+                type="text"
+                name="gender"
+                value={userData.name}
+                onChange={handleChange}
+                className="border rounded px-2 py-1"
+                placeholder='성별'
+              />
+            </td>
+          </tr>          
           <tr>
             <td className="px-2 py-2 text-right">이메일:</td>
             <td className="px-2 py-2">
@@ -85,10 +148,10 @@ const UserInfoModalContent: React.FC<ModalInfoChange> = ({ closeModal }) => {
                 value={userData.email}
                 onChange={handleChange}
                 className="border rounded px-2 py-1"
+                placeholder='user@example.coms'
               />
             </td>
           </tr>
-          {/* 기타 필드 추가 가능 */}
         </tbody>
       </table>
       <div className="text-center mt-4">
